@@ -26,5 +26,6 @@ while True:
                     if data['status'] != 'live_stream_offline':
                         requests.post(webhook, {'username':'봇','content':'{0}의 코딩야학이 시작되었습니다.\n바로가기 : {1}'.format(today, link)})
                         print(data)
-                    break
+                        tomorrow = today + timedelta(days=1)
+                        break
                 sleep(5)
