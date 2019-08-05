@@ -24,8 +24,8 @@ while True:
                 with requests.get('http://youtube.com/heartbeat?video_id={id}&heartbeat_token&c=WEB_EMBEDDED_PLAYER&cver=20190730&utc_offset_minutes=540&upg_content_filter_mode=false&sequence_number=0&time_zone=Asia%%2FSeoul&cpn=BRz7ZfMPp6TxW-_I'.format(id=id_)) as r:
                     data = r.json()
                     if data['status'] != 'live_stream_offline':
-                        requests.post(webhook, {'username':'봇','content':'{0}의 코딩야학이 시작되었습니다.\n바로가기 : {1}'.format(today, link)})
-                        print(data)
+                        requests.post(webhook, {'content':'{0}의 코딩야학이 시작되었습니다!!\n바로가기 : {1}'.format(date, link)})
+                        print('started!')
                         tomorrow = today + timedelta(days=1)
                         break
                 sleep(5)
