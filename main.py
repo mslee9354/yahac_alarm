@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 
 webhook = 'https://discordapp.com/api/webhooks/607836586402643970/zRubGSGvIRwt9YLreWuuaYz64LdbWThNyz0h6eN3QgFtA_arUeHJ5gkVTsu0jxozLShP'
 
-
 tomorrow = datetime.today()
 while True:
     with requests.get('https://coding.yah.ac/live.html') as r:
@@ -32,15 +31,15 @@ while True:
                     if data['status'] == 'live_stream_offline':
                         if timeMsgReason != data['reason']:
                             timeMsgReason = data['reason']
-                            if timeMsgflag > 1:
+                            if (timeMsgflag % 300) == 0:
                                 requests.post(webhook, {'content':'[Live 알림]\n**{0}의 코딩야학 라이브 방송알림**\n{1}\n\n[바로가기] {2}'.format(date, timeMsgReason, link)})
                             timeMsgflag += 1
 
                         if off_flag == 0:
                             off_flag = 1
-                            sleep(5)
                             requests.post(webhook, {'content':'[Live 알림]\n**{0}의 코딩야학 라이브 방송이 등록되었습니다!!**\n아래의 바로가기를 통하여 채팅에 참여 하실 수 있습니다.\n- {1}\n\n[바로가기] {2}'.format(date, timeMsgReason, link)})
                             print(data)
+                            sleep(5)
                             continue
 
                     if data['status'] != 'live_stream_offline':
