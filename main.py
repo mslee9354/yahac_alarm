@@ -3,10 +3,7 @@ from bs4 import BeautifulSoup
 from time import sleep
 from datetime import datetime, timedelta
 
-#? test Server
-# webhook = 'https://discordapp.com/api/webhooks/608173101011959819/3Ji7a5yfgs7sn1MTv1aMZK2IPk9RJE6oJx-GmoabHMCWt53PYqOOKp5ek2HdjpSt_t-m'
-#! main Server
-webhook = 'https://discordapp.com/api/webhooks/607935199862325259/Xi4WpdyTedByqcWwVUKO-Rs-PwU4gkUoLA6VkROF-pA1yMWGKty7pCyoDG1Uy0unvY4w'
+webhook = 'https://discordapp.com/api/webhooks/607836586402643970/zRubGSGvIRwt9YLreWuuaYz64LdbWThNyz0h6eN3QgFtA_arUeHJ5gkVTsu0jxozLShP'
 
 tomorrow = datetime.today()
 while True:
