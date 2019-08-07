@@ -8,12 +8,12 @@ webhook = 'https://discordapp.com/api/webhooks/607496802832220170/T9Gbd35C-mbk67
 
 tomorrow = datetime.today()
 while True:
-    with requests.get('https://coding.yah.ac/live.html') as r:
-        soup = BeautifulSoup(r.text, 'html.parser')
-        links = soup.select('a')
-        today = datetime.today()
-        date = '{0}년 {1}월 {2}일'.format(today.year, today.month, today.day)
-        if today.day == tomorrow.day:
+    today = datetime.today()
+    if today.day == tomorrow.day:
+        with requests.get('https://coding.yah.ac/live.html') as r:
+            soup = BeautifulSoup(r.text, 'html.parser')
+            links = soup.select('a')
+            date = '{0}년 {1}월 {2}일'.format(today.year, today.month, today.day)
             id_ = ''
             link = ''
             reason = ''
@@ -29,11 +29,11 @@ while True:
                     data = r.json()
                     if data['status'] == 'live_stream_offline':
                         if reason != data['reason']:
-                            if reason_count % 300 == 0:
+                            if reason_count % 10 == 0 and reason_count != 0:
                                 requests.post(webhook, {'content':'[Live 알림]\n**{0}의 코딩야학 라이브 방송알림**\n{1}\n\n[바로가기] {2}'.format(date, data['reason'], link)})
+                                print(data['reason'])
                             reason = data['reason']
                             reason_count += 1
-                            print(reason_count)
                     else:
                         assert data['status'] != 'error', 'error!'
                         
