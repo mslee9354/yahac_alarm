@@ -3,7 +3,10 @@ from bs4 import BeautifulSoup
 from time import sleep
 from datetime import datetime, timedelta
 
-webhook = 'https://discordapp.com/api/webhooks/607836586402643970/zRubGSGvIRwt9YLreWuuaYz64LdbWThNyz0h6eN3QgFtA_arUeHJ5gkVTsu0jxozLShP'
+#? test Server
+# webhook = 'https://discordapp.com/api/webhooks/608173101011959819/3Ji7a5yfgs7sn1MTv1aMZK2IPk9RJE6oJx-GmoabHMCWt53PYqOOKp5ek2HdjpSt_t-m'
+#! main Server
+webhook = 'https://discordapp.com/api/webhooks/607935199862325259/Xi4WpdyTedByqcWwVUKO-Rs-PwU4gkUoLA6VkROF-pA1yMWGKty7pCyoDG1Uy0unvY4w'
 
 tomorrow = datetime.today()
 while True:
@@ -11,7 +14,7 @@ while True:
         soup = BeautifulSoup(r.text, 'html.parser')
         links = soup.select('a')
         today = datetime.today()
-        date = '{0}³â {1}¿ù {2}ÀÏ'.format(today.year, today.month, today.day)
+        date = '{0}ë…„ {1}ì›” {2}ì¼'.format(today.year, today.month, today.day)
         id_ = ''
         link = ''
         timeMsgReason = ''
@@ -29,15 +32,17 @@ while True:
                 with requests.get('http://youtube.com/heartbeat?video_id={id}&heartbeat_token&c=WEB_EMBEDDED_PLAYER&cver=20190730&utc_offset_minutes=540&upg_content_filter_mode=false&sequence_number=0&time_zone=Asia%%2FSeoul&cpn=BRz7ZfMPp6TxW-_I'.format(id=id_)) as r:
                     data = r.json()
                     if data['status'] == 'live_stream_offline':
+                        print(data)
                         if timeMsgReason != data['reason']:
                             timeMsgReason = data['reason']
-                            if (timeMsgflag % 300) == 0:
-                                requests.post(webhook, {'content':'[Live ¾Ë¸²]\n**{0}ÀÇ ÄÚµù¾ßÇĞ ¶óÀÌºê ¹æ¼Û¾Ë¸²**\n{1}\n\n[¹Ù·Î°¡±â] {2}'.format(date, timeMsgReason, link)})
+                            if (timeMsgflag % 10) == 0 and timeMsgflag != 0:
+                                requests.post(webhook, {'content':'[Live ì•Œë¦¼]\n**{0}ì˜ ì½”ë”©ì•¼í•™ ë¼ì´ë¸Œ ë°©ì†¡ì•Œë¦¼**\n- {1}\n\n[ë°”ë¡œê°€ê¸°] {2}'.format(date, timeMsgReason, link)})
                             timeMsgflag += 1
+                            print(timeMsgflag)
 
                         if off_flag == 0:
                             off_flag = 1
-                            requests.post(webhook, {'content':'[Live ¾Ë¸²]\n**{0}ÀÇ ÄÚµù¾ßÇĞ ¶óÀÌºê ¹æ¼ÛÀÌ µî·ÏµÇ¾ú½À´Ï´Ù!!**\n¾Æ·¡ÀÇ ¹Ù·Î°¡±â¸¦ ÅëÇÏ¿© Ã¤ÆÃ¿¡ Âü¿© ÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.\n- {1}\n\n[¹Ù·Î°¡±â] {2}'.format(date, timeMsgReason, link)})
+                            requests.post(webhook, {'content':'[Live ì•Œë¦¼]\n**{0}ì˜ ì½”ë”©ì•¼í•™ ë¼ì´ë¸Œ ë°©ì†¡ì´ ë“±ë¡ë˜ì—ˆìŠµë‹ˆë‹¤!!**\nì•„ë˜ì˜ ë°”ë¡œê°€ê¸°ë¥¼ í†µí•˜ì—¬ ì±„íŒ…ì— ì°¸ì—¬ í•˜ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.\n- {1}\n\n[ë°”ë¡œê°€ê¸°] {2}'.format(date, timeMsgReason, link)})
                             print(data)
                             sleep(5)
                             continue
@@ -48,8 +53,8 @@ while True:
                             sleep(5)
                             continue
 
-                        requests.post(webhook, {'content':'[Live ¾Ë¸²]\n**{0}ÀÇ ÄÚµù¾ßÇĞ ¶óÀÌºê ¹æ¼ÛÀÌ ½ÃÀÛµÇ¾ú½À´Ï´Ù!!**\n¾Æ·¡ÀÇ ¹Ù·Î°¡±â¸¦ ÅëÇÏ¿© ¶óÀÌºê¸¦ È®ÀÎ ÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.\n\n[¹Ù·Î°¡±â]{1}'.format(date, link)})
-                        print('started!')
+                        requests.post(webhook, {'content':'[Live ì•Œë¦¼]\n**{0}ì˜ ì½”ë”©ì•¼í•™ ë¼ì´ë¸Œ ë°©ì†¡ì´ ì‹œì‘ë˜ì—ˆìŠµë‹ˆë‹¤!!**\nì•„ë˜ì˜ ë°”ë¡œê°€ê¸°ë¥¼ í†µí•˜ì—¬ ë¼ì´ë¸Œë¥¼ í™•ì¸ í•˜ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.\n\n[ë°”ë¡œê°€ê¸°]{1}'.format(date, link)})
+                        print('Send Message Live start!')
                         tomorrow = today + timedelta(days=1)
                         break
                 sleep(5)
