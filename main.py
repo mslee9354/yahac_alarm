@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from time import sleep
 from datetime import datetime, timedelta
 
-webhook = 'https://discordapp.com/api/webhooks/607836586402643970/zRubGSGvIRwt9YLreWuuaYz64LdbWThNyz0h6eN3QgFtA_arUeHJ5gkVTsu0jxozLShP'
+webhook = 'https://discordapp.com/api/webhooks/607496802832220170/T9Gbd35C-mbk67D3l4sZIB6g94MzakgqnAJJUR7ERAngkVlf-_SzYQahtupTeGkc4wgP'
 
 
 tomorrow = datetime.today()
@@ -29,10 +29,11 @@ while True:
                     data = r.json()
                     if data['status'] == 'live_stream_offline':
                         if reason != data['reason']:
+                            if reason_count % 300 == 0:
+                                requests.post(webhook, {'content':'[Live 알림]\n**{0}의 코딩야학 라이브 방송알림**\n{1}\n\n[바로가기] {2}'.format(date, data['reason'], link)})
                             reason = data['reason']
                             reason_count += 1
-                        if reason_count % 300 == 0:
-                            requests.post(webhook, {'content':'[Live 알림]\n**{0}의 코딩야학 라이브 방송알림**\n{1}\n\n[바로가기] {2}'.format(date, data['reason'], link)})
+                            print(reason_count)
                     else:
                         assert data['status'] != 'error', 'error!'
                         
