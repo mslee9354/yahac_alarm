@@ -3,10 +3,12 @@ from bs4 import BeautifulSoup
 from time import sleep
 from datetime import datetime, timedelta
 
-webhook = 'https://discordapp.com/api/webhooks/607836586402643970/zRubGSGvIRwt9YLreWuuaYz64LdbWThNyz0h6eN3QgFtA_arUeHJ5gkVTsu0jxozLShP'
+webhook = 'https://discordapp.com/api/webhooks/607496802832220170/T9Gbd35C-mbk67D3l4sZIB6g94MzakgqnAJJUR7ERAngkVlf-_SzYQahtupTeGkc4wgP'
+
 
 tomorrow = datetime.today()
 while True:
+
     with requests.get('https://coding.yah.ac/live.html') as r:
         soup = BeautifulSoup(r.text, 'html.parser')
         links = soup.select('a')
@@ -52,6 +54,7 @@ while True:
 
                         requests.post(webhook, {'content':'[Live 알림]\n**{0}의 코딩야학 라이브 방송이 시작되었습니다!!**\n아래의 바로가기를 통하여 라이브를 확인 하실 수 있습니다.\n\n[바로가기]{1}'.format(date, link)})
                         print('Send Message Live start!')
+
                         tomorrow = today + timedelta(days=1)
                         break
                 sleep(5)
