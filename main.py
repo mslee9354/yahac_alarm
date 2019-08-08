@@ -30,13 +30,14 @@ while True:
                     data = r.json()
                     if data['status'] == 'live_stream_offline':
                         if reason != data['reason']:
-                            if reason_count % 120 == 0 and reason_count != 0:
+                            if reason_count % 10 == 0 and reason_count != 0:
                                 requests.post(webhook, {'content':'[Live 알림]\n**{0}의 코딩야학 라이브 방송알림**\n{1}\n\n[바로가기] {2}'.format(date, data['reason'], link)})
                                 print(data['reason'])
                             reason = data['reason']
                             reason_count += 1
+                            print(reason_count)
                     else:
-                        assert data['status'] != 'error', 'error!'
+                        assert data['status'] != 'error', 'error! '+ id_
                         
                         requests.post(webhook, {'content':'[Live 알림]\n**{0}의 코딩야학 라이브 방송이 시작되었습니다!!**\n아래의 바로가기를 통하여 라이브를 확인 하실 수 있습니다.\n\n[바로가기]{1}'.format(date, link)})
                         print('started!')
