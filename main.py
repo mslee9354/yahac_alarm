@@ -29,7 +29,7 @@ while True:
                     data = r.json()
                     if data['status'] == 'live_stream_offline':
                         if reason != data['reason']:
-                            if reason_count % 10 == 0 and reason_count != 0:
+                            if reason_count % 120 == 0 and reason_count != 0:
                                 requests.post(webhook, {'content':'[Live 알림]\n**{0}의 코딩야학 라이브 방송알림**\n{1}\n\n[바로가기] {2}'.format(date, data['reason'], link)})
                                 print(data['reason'])
                             reason = data['reason']
